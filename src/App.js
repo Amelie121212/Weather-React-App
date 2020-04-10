@@ -77,10 +77,12 @@ class App extends React.Component {
         temp_max: this.calCelsius(response.main.temp_max),
         temp_min: this.calCelsius(response.main.temp_min),
         description: response.weather[0].description,
+        error: false
       });
       this.get_Weathericon(this.weathericon, response.weather[0].id);
     } else {
       this.setState({error:true});
+      console.log(this.state.error);
     }
   };
   render() {
