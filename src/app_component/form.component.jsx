@@ -1,6 +1,7 @@
 import React from "react";
 import './form.style.css';
-const Form = props =>{
+
+const Form = (props) =>{
     return(
         <div className="container">
             <div>{props.error ? error():null}</div>

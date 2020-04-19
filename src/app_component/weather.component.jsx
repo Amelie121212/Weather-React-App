@@ -2,7 +2,8 @@ import React from 'react';
 
 const Weather = (props) => {
     return(
-        <div className="bd-highlight container">
+        <div>{!props.error ?
+        (<div id="main" className="bd-highlight container">
             <div className="cards pt-4">
                 {props.city?(<h1>{props.city}, {props.country}</h1>):null}
                 <h5 className="py-4">
@@ -12,7 +13,7 @@ const Weather = (props) => {
                 {minmaxTemp(props.temp_min,props.temp_max)}
                 <h4 className="py-4">{props.description}</h4>
             </div>
-        </div>
+        </div>): null }</div>
     );
 };
 

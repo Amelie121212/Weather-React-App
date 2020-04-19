@@ -66,10 +66,10 @@ class App extends React.Component {
     event.preventDefault();
     const country= event.target.elements.country.value;
     const city= event.target.elements.city.value;
-    if(city && country){
-      const api_call= await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
-      const response= await api_call.json();
-      console.log(response);
+    const api_call= await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`);
+    const response= await api_call.json();
+    console.log(response);
+    if(response.cod!=="404") {
       this.setState({
         city: response.name,
         country: response.sys.country,
@@ -80,7 +80,7 @@ class App extends React.Component {
         error: false
       });
       this.get_Weathericon(this.weathericon, response.weather[0].id);
-    } else {
+    } else{
       this.setState({error:true});
       console.log(this.state.error);
     }
@@ -88,7 +88,10 @@ class App extends React.Component {
   render() {
     return(
       <div className="App">
-        <Form loadweather={this.getWeather} error={this.state.error}/>
+        <Form 
+          loadweather={this.getWeather} 
+          error={this.state.error}
+        />
         <Weather 
           city={this.state.city} 
           country={this.state.country} 
@@ -97,6 +100,7 @@ class App extends React.Component {
           temp_max={this.state.temp_max} 
           description={this.state.description}
           weathericon={this.state.icon}
+          error={this.state.error}
         />
       </div>
     );
